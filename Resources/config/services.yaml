@@ -1,0 +1,8 @@
+services:
+    maintenance.listener:
+        class: Arkanii\MaintenanceBundle\EventListener\MaintenanceListener
+        arguments:
+            $container: "@service_container"
+            $twig: "@twig"
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
