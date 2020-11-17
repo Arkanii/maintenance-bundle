@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class MaintenanceExtension extends Extension
+class ArkaniiMaintenanceExtension extends Extension
 {
     /**
      * Loads a specific configuration.
@@ -19,8 +19,8 @@ class MaintenanceExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration(new Configuration(), $configs);
+
         $container->setParameter('maintenance.enabled', $config['enabled']);
         $container->setParameter('maintenance.authorized_ips', $config['authorized_ips']);
         $container->setParameter('maintenance.debug_urls', $config['debug_urls']);

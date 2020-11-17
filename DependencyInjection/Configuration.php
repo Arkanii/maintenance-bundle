@@ -15,10 +15,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder("maintenance");
+        $treeBuilder = new TreeBuilder("arkanii_maintenance");
 
-        $rootNode = $treeBuilder->getRootNode();
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
                 ->booleanNode('enabled')
                     ->info('Enabled the maintenance status.')

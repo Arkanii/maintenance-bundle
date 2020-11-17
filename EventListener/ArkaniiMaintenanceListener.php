@@ -10,7 +10,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-class MaintenanceListener
+class ArkaniiMaintenanceListener
 {
     /**
      * @var ContainerInterface
@@ -22,6 +22,11 @@ class MaintenanceListener
      */
     private $twig;
 
+    /**
+     * ArkaniiMaintenanceListener constructor.
+     * @param ContainerInterface $container
+     * @param Environment $twig
+     */
     public function __construct(ContainerInterface $container, Environment $twig)
     {
         $this->container = $container;
@@ -36,8 +41,6 @@ class MaintenanceListener
      */
     public function onKernelRequest(RequestEvent $event)
     {
-        $maintenance = true;
-
         $request = $event->getRequest();
 
         $linkRequest = $request->getRequestUri();
@@ -52,27 +55,27 @@ class MaintenanceListener
         if ($enabled) {
 
             if (in_array($currentIp, $authorized_ips)) {
-                $maintenance = false;
+                $enabled = false;
             }
 
             foreach ($debug_urls as $debug_url) {
                 if ((bool)preg_match('/\/' . $debug_url . '\//', $linkRequest)) {
-                    $maintenance = false;
+                    $enabled = false;
                 }
             }
 
             if ($authorize_admin_panel) {
                 if ((bool)preg_match('/\/' . $admin_url . '\//', $linkRequest)) {
-                    $maintenance = false;
+                    $enabled = false;
                 }
             }
+
         }
 
-        if ($maintenance) {
-            $view = $this->twig->render('@Maintenance/maintenance.html.twig');
+        if ($enabled) {
+            $view = $this->twig->render('@ArkaniiMaintenance/maintenance.html.twig');
             $event->setResponse(new Response($view, Response::HTTP_SERVICE_UNAVAILABLE));
             $event->stopPropagation();
         }
-
     }
 }

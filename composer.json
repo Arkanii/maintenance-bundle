@@ -1,0 +1,29 @@
+{
+    "name": "arkanii/maintenance-bundle",
+    "description": "This bundle allows you to place your website in maintenance mode.",
+    "type": "symfony-bundle",
+    "keywords": [
+        "Symfony",
+        "Bundle",
+        "Maintenance"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Théo Frison",
+            "email": "t.frison@outlook.fr",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1 || ^8.0",
+        "../../vendor/symfony/framework-bundle": "^4.4 || ^5.0",
+        "../../vendor/symfony/dependency-injection": "^4.4 || ^5.0",
+        "../../vendor/twig/twig": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arkanii\\MaintenanceBundle\\": ""
+        }
+    }
+}

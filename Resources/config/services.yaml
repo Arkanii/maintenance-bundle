@@ -1,6 +1,6 @@
 services:
-    maintenance.listener:
-        class: Arkanii\MaintenanceBundle\EventListener\MaintenanceListener
+    arkanii_maintenance.listener:
+        class: Arkanii\MaintenanceBundle\EventListener\ArkaniiMaintenanceListener
         arguments:
             $container: "@service_container"
             $twig: "@twig"
